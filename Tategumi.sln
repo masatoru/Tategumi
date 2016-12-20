@@ -188,6 +188,7 @@ Global
 		{E2440A69-2151-4CF2-968A-F816E5278FB1}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{E2440A69-2151-4CF2-968A-F816E5278FB1}.Debug|iPhone.Build.0 = Debug|iPhone
 		{E2440A69-2151-4CF2-968A-F816E5278FB1}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{E2440A69-2151-4CF2-968A-F816E5278FB1}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{E2440A69-2151-4CF2-968A-F816E5278FB1}.Debug|x64.ActiveCfg = Debug|iPhone
 		{E2440A69-2151-4CF2-968A-F816E5278FB1}.Debug|x86.ActiveCfg = Debug|iPhone
 		{E2440A69-2151-4CF2-968A-F816E5278FB1}.Release|Any CPU.ActiveCfg = Release|iPhone
