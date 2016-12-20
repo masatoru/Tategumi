@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             mvvm:ViewModelLocator.AutowireViewModel="True"
+             xmlns:local="clr-namespace:Tategumi.TategumiViews"
+             x:Class="Tategumi.Views.HonbunPage">
+
+  <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+    <local:TategumiView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                        Width="{Binding TateviewWidth.Value}"
+                        Height="{Binding TateviewHeight.Value}"
+                        CurrentPage="{Binding CurrentPage.Value}"
+                        PageIndex="{Binding Path=PageIndex.Value,Mode=TwoWay}">
+    </local:TategumiView>
+    <StackLayout Orientation="Horizontal" VerticalOptions="End">
+      <Slider VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+              Minimum="0" Value="{Binding Path=PageIndex.Value,Mode=TwoWay}"/>
+      <Label Text="{Binding PageIndex.Value}"/>
+      <Label Text="/"/>
+      <Label Text="{Binding PageNum.Value}"/>
+    </StackLayout>
+  </StackLayout>
+  
+</ContentPage>
