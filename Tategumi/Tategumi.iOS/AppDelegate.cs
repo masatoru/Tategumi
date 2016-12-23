@@ -5,18 +5,27 @@ using System.IO;
 using System.Linq;
 
 using Foundation;
+using Microsoft.Practices.Unity;
+using Prism.Unity;
 using Tategumi.iOS.Services;
 using Tategumi.TategumiViews;
 using UIKit;
 
 namespace Tategumi.iOS
 {
+  public class iOSInitializer : IPlatformInitializer
+  {
+    public void RegisterTypes(IUnityContainer container)
+    {
+    }
+  }
   // The UIApplicationDelegate for the application. This class is responsible for launching the 
   // User Interface of the application, as well as listening (and optionally responding) to 
   // application events from iOS.
   [Register("AppDelegate")]
   public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
   {
+
     //
     // This method is invoked when the application has loaded and is ready to run. In this 
     // method you should instantiate the window, load the UI into it and then make the window
@@ -44,22 +53,12 @@ namespace Tategumi.iOS
         Directory.CreateDirectory(dir);
       }
       TategumiViewCore.WorkingDirectory = dir;
-      TategumiViewCore.OpenFileDelegate = path =>
-      {
-        var vc = Xamarin.Forms.Platform.iOS.Platform.GetRenderer(Xamarin.Forms.Application.Current.MainPage) as UIViewController;
-        var resourceToOpen = NSUrl.FromFilename(Path.Combine(dir, path));
-        var controller = UIDocumentInteractionController.FromUrl(resourceToOpen);
-        if (!controller.PresentOpenInMenu(vc.View.Bounds, vc.View, true))
-        {
-          new UIAlertView("Tateguni", "Unable to open file.", null, "OK").Show();
-        }
-      };
 
       global::Xamarin.Forms.Forms.Init();
       Debug.WriteLine($"AppDelegate FinishedLaunching Xamarin.Forms.Forms.Init");
 
       Xamarin.Forms.DependencyService.Register<ResourceDirectoryImpl>();
-      LoadApplication(new App());
+      LoadApplication(new App(new iOSInitializer()));
 
       return base.FinishedLaunching(app, options);
     }
