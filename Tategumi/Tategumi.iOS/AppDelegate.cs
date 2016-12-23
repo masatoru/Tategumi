@@ -26,6 +26,7 @@ namespace Tategumi.iOS
     //
     public override bool FinishedLaunching(UIApplication app, NSDictionary options)
     {
+      Debug.WriteLine($"AppDelegate FinishedLaunching");
       // set up resource paths
       //string fontName = "content-font.ttf";
       string fontName = "ipaexm.ttf";
@@ -34,7 +35,7 @@ namespace Tategumi.iOS
       {
         new UIAlertView("Tateguni", $"ファイルがない {fontPath}", null, "OK").Show();
       }
-      Debug.WriteLine($"AppDelegate FinishedLaunching 1 CustomFontPath={fontPath}");
+      Debug.WriteLine($"AppDelegate FinishedLaunching FontPath={fontPath}");
       TategumiViewCore.OpenFontStream = () => File.OpenRead(fontPath);
 
       var dir = Path.Combine(Path.GetTempPath(), "Tategumi", Path.GetRandomFileName());
@@ -55,6 +56,8 @@ namespace Tategumi.iOS
       };
 
       global::Xamarin.Forms.Forms.Init();
+      Debug.WriteLine($"AppDelegate FinishedLaunching Xamarin.Forms.Forms.Init");
+
       Xamarin.Forms.DependencyService.Register<ResourceDirectoryImpl>();
       LoadApplication(new App());
 
