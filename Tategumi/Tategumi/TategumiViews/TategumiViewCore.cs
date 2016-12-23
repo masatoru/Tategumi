@@ -156,6 +156,6 @@ namespace Tategumi.TategumiViews
     }
     public static Func<System.IO.Stream> OpenFontStream { get; set; }
     public static string WorkingDirectory { get; set; }
-    public static Action<string> OpenFileDelegate { get; set; }
+    //public static Action<string> OpenFileDelegate { get; set; }
   }
 }

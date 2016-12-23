@@ -44,12 +44,6 @@ namespace Tategumi.Droid
       Log.Info(TAG, $"OnCreate dir={dir}");
 
       TategumiViewCore.WorkingDirectory = dir;
-      TategumiViewCore.OpenFileDelegate = path =>
-      {
-        var file = new Java.IO.File(Path.Combine(dir, path));
-        var uri = Android.Net.Uri.FromFile(file);
-        StartActivity(new Intent(Intent.ActionView, uri));
-      };
       base.OnCreate(bundle);
 
       Log.Info(TAG, "OnCreate Forms.Init");
