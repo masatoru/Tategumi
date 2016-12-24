@@ -38,6 +38,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="BlueMonkey\BehaviorBase.cs" />
+    <Compile Include="BlueMonkey\EventToCommandBehavior.cs" />
+    <Compile Include="BlueMonkey\ItemSelectedToCommandBehavior.cs" />
     <Compile Include="Models\BookItem.cs" />
     <Compile Include="Models\BookManager.cs" />
     <Compile Include="Models\IBookManager.cs" />
@@ -69,10 +72,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Corcav.Behaviors, Version=2.3.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Corcav.Behaviors.2.3.4\lib\Corcav.Behaviors.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\HtmlAgilityPack.1.4.0\lib\Silverlight 4.0\HtmlAgilityPack.dll</HintPath>
       <Private>True</Private>
@@ -158,6 +157,7 @@
       <Name>Hanako</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

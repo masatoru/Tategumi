@@ -1,23 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:b="clr-namespace:Corcav.Behaviors;assembly=Corcav.Behaviors"
+             xmlns:b="clr-namespace:BlueMonkey;assembly=Tategumi"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Tategumi.Views.BookListPage">
+             x:Class="Tategumi.Views.BookListPage" x:Name="MainPage">
   <StackLayout Orientation="Vertical">
     <ListView ItemsSource="{Binding BookList}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
               SelectedItem="{Binding BookSelected}">
-        
-     <b:Interaction.Behaviors>
-        <b:BehaviorCollection>
-          <b:EventToCommand  EventName="ItemTapped" Command="{Binding ViewBookCommand}" />
-        </b:BehaviorCollection>
-      </b:Interaction.Behaviors>
-    
+      <ListView.Behaviors>
+        <b:ItemSelectedToCommandBehavior Command="{Binding ViewBookCommand}"/>
+      </ListView.Behaviors>
     <ListView.ItemTemplate>
         <DataTemplate>
-          <!--ImageCell Text="{Binding Title}" Detail="{Binding Chosha}" ImageSource="{Binding Url}" TextColor="Blue" DetailColor="Black" />-->
           <TextCell Text="{Binding TitleChosha}" TextColor="Black" />
         </DataTemplate>
       </ListView.ItemTemplate>

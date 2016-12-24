@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using CoreGraphics;
 using SkiaSharp;
 using Tategumi.TategumiViews;
@@ -6,15 +7,15 @@ using UIKit;
 
 namespace Tategumi.iOS.Views
 {
-	public class NativeTategumiView: UIView
+	public sealed class NativeTategumiView: UIView
 	{
 		const int bitmapInfo = ((int)CGBitmapFlags.ByteOrder32Big) | ((int)CGImageAlphaInfo.PremultipliedLast);
 
-		ITategumiViewController _tategumiView;
+	  private ITategumiViewController _tateView;
 
-		public NativeTategumiView (TategumiView tategumiView)
+		public NativeTategumiView (TategumiView tateView)
 		{
-			this._tategumiView = tategumiView;
+			this._tateView = tateView;
 
 			AddGestureRecognizer (new UITapGestureRecognizer (OnTapped));
 		}
@@ -33,7 +34,7 @@ namespace Tategumi.iOS.Views
 					var skcanvas = surface.Canvas;
 					skcanvas.Scale ((float)screenScale, (float)screenScale);
 					using (new SKAutoCanvasRestore (skcanvas, true)) {
-						_tategumiView.SendDraw (skcanvas);
+						_tateView.SendDraw (skcanvas);
 					}
 				}
 
@@ -54,11 +55,14 @@ namespace Tategumi.iOS.Views
 
 		void OnTapped (UITapGestureRecognizer re)
 		{
-            var point = re.LocationOfTouch(re.NumberOfTouches, this);
-      //tategumiView.SendTap ();
+      var point = re.LocationInView(this);
 
-      bool res = _tategumiView.NextPage();
-      if(res==true)
+      if (Bounds.Width / 2f < point.X)
+        _tateView.PrevPage();
+      else
+        _tateView.NextPage();
+
+      //if (res==true)
         SetNeedsDisplay();    //再描画
 		}
 
