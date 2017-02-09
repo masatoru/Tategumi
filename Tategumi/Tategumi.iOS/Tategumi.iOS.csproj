@@ -106,6 +106,7 @@
     <Compile Include="Renderers\TategumiViewRenderer.cs" />
     <Compile Include="Services\ResourceDirectoryImpl.cs" />
     <Compile Include="Views\NativeTategumiView.cs" />
+    <None Include="app.config" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -161,6 +162,18 @@
       <HintPath>..\..\packages\Prism.Unity.Forms.6.2.0\lib\Xamarin.iOS1.0\Prism.Unity.Forms.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ReactiveProperty, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ReactiveProperty.2.9.0\lib\Xamarin.iOS10\ReactiveProperty.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ReactiveProperty.DataAnnotations, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ReactiveProperty.2.9.0\lib\Xamarin.iOS10\ReactiveProperty.DataAnnotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ReactiveProperty.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ReactiveProperty.2.9.0\lib\Xamarin.iOS10\ReactiveProperty.iOS.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
@@ -178,12 +191,6 @@
     </Reference>
     <Reference Include="System.Reactive.PlatformServices">
       <HintPath>..\..\packages\System.Reactive.PlatformServices.3.1.1\lib\netstandard1.3\System.Reactive.PlatformServices.dll</HintPath>
-    </Reference>
-    <Reference Include="ReactiveProperty">
-      <HintPath>..\..\packages\ReactiveProperty.3.4.0\lib\Xamarin.iOS10\ReactiveProperty.dll</HintPath>
-    </Reference>
-    <Reference Include="ReactiveProperty.iOS">
-      <HintPath>..\..\packages\ReactiveProperty.3.4.0\lib\Xamarin.iOS10\ReactiveProperty.iOS.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.3.180\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
