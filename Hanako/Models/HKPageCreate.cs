@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace Hanako.Models
   {
     //描画するページのWaxLineListを取得
     // lnlst : X は 15 ==> 15+22.5... ==> 15+22.5+22.5...
-    public static void CreatePageList(float viewW,float fntSz, List<HKWaxLine> lnlst, ref IList<IHKWaxPage> pglst)
+    public static void CreatePageList(float viewW,float fntSz, List<HKWaxLine> lnlst, ref List<IHKWaxPage> pglst)
     {
       var curPage = 1;
       var pageStartX = 0f;   //改頁したことでXの位置をゼロに戻す

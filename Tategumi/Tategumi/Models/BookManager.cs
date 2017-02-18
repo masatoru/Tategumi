@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Hanako.Models;
 using Prism.Mvvm;
@@ -13,24 +15,32 @@ namespace Tategumi.Models
   {
     private int CurrentArticleId { get; set; }
     List<HKPara> _paralst;  //段落
-    IList<IHKWaxPage> _pglst;     //組版されたページ一覧
+    public List<IHKWaxPage> PageList { get; set; } //組版されたページ一覧
     List<HKWaxLine> _lnlst;
 
     public BookManager()
     {
       _paralst = new List<HKPara>();
       _lnlst = new List<HKWaxLine>();
-      _pglst =new List<IHKWaxPage>();
+      PageList =new List<IHKWaxPage>();
       CurrentArticleId = -1;
     }
   
     #region 目次とかページ数、ページなど
-    private IHKWaxPage _waxpage;
+    /*private IHKWaxPage _waxpage;
     public IHKWaxPage CurrentPage
     {
       get { return this._waxpage; }
       set { SetProperty(ref _waxpage, value); }
+    }*/
+
+    private bool _isEnableView;
+    public bool IsEnableView
+    {
+      get { return this._isEnableView; }
+      set { SetProperty(ref _isEnableView, value); }
     }
+
     private int _pagenum;
     public int PageNum
     {
@@ -45,8 +55,10 @@ namespace Tategumi.Models
       {
         if (value != _pageIndex)
         {
+          //Debug.WriteLine($"BookManager before PageIndex={_pageIndex}");
+          //PageList[_pageIndex].CanDraw = true;
           SetProperty(ref _pageIndex, value);
-          CurrentPage = _pglst[_pageIndex];   //SkiaViewへBinding
+          //Debug.WriteLine($"BookManager after PageIndex={_pageIndex}");
         }
       }
     }
@@ -158,11 +170,13 @@ namespace Tategumi.Models
 #region ページを組版
     public void Compose()
     {
+      Debug.WriteLine($"Compose para.count={_paralst.Count}");
       //if (_paralst?.Count == 0 ) return;
       if (isValid() != true) return;
 
       int devw = _tateviewWidth;
       int devh = _tateviewHeight;
+
       //1.Compose
       float fntSz = 24;
       if (_isFontSizeLarge == true)
@@ -178,18 +192,29 @@ namespace Tategumi.Models
       comp.Init((float)devw - mg * 2, (float)devh - mg * 2);
       _lnlst.Clear();
       comp.Compose(_paralst, ref _lnlst);
+      Debug.WriteLine($"Compose line.count={_lnlst.Count}");
 
       //2.Page一覧
-      _pglst.Clear();
-      HKPageCreate.CreatePageList((float)devw - mg * 2, fntSz, _lnlst, ref _pglst);
+      PageList.Clear();
+      var pglst = PageList;
+      HKPageCreate.CreatePageList((float)devw - mg * 2, fntSz, _lnlst, ref pglst);
+
+      //先頭ページだけ描画OK
+      pglst[0].CanDraw = true;
+
+      //反転させる
+      pglst.Reverse();  
+
+      Debug.WriteLine($"Compose page.count={pglst.Count}");
 
       //3.Deviceの値に変換
       HKDevice dev = new HKDevice();
       dev.setup(fntSz, (float)devw, (float)devh, mg, mg, mg, mg);
-      dev.calcToDevice(ref _pglst);
+      dev.calcToDevice(ref pglst);
 
-      CurrentPage = _pglst[0];
-      PageNum = _pglst.Count;
+      //CurrentPage = PageList[0];
+      //CurrentPage = PageList.Last();
+      PageNum = PageList.Count;
     }
 #endregion
 

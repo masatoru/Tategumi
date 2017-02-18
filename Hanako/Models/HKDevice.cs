@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +36,7 @@ namespace Hanako.Models
     //デバイスの単位に変換
     // lnlst 右上をゼロとして左にプラス
     // デバイス 左上がゼロ、右へプラス
-    public void calcToDevice(ref IList<IHKWaxPage> pglst)
+    public void calcToDevice(ref List<IHKWaxPage> pglst)
     {
       if (DevWidth <=0 || DevHeight <=0 || FontSize<=0)
         throw new Exception("幅/高さ/文字サイズが定義されていない");

@@ -11,5 +11,6 @@ namespace Hanako.Models
   {
     IList<HKWaxLine> Lines { get; set; }
     int Page { get; }
+    bool CanDraw { get; set; }
   }
 }

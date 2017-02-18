@@ -16,7 +16,7 @@ namespace Tategumi.Droid.Views
 		{
 			this._tategumiView = tategumiView;
 			this._tateView = tategumiView;
-      this.Touch += OnTouched;
+      //this.Touch += OnTouched;
     }
 
     protected override void OnDraw (Android.Graphics.Canvas canvas)
@@ -47,7 +47,7 @@ namespace Tategumi.Droid.Views
     
     //タップしたら左半分で次頁、右半分で前頁
     //→ほんとは処理をModelに渡したい
-    void OnTouched(object sender, TouchEventArgs e)
+    /*void OnTouched(object sender, TouchEventArgs e)
     {
       if (e.Event.Action != MotionEventActions.Up)
         return;
@@ -55,7 +55,7 @@ namespace Tategumi.Droid.Views
         _tateView.PrevPage();
       else
         _tateView.NextPage();
-    }
+    }*/
   }
 }
 

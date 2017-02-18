@@ -13,8 +13,10 @@ namespace Hanako.Models
     {
       Lines = new List<HKWaxLine>();
       Page = page;
+      CanDraw = false;
     }
     public IList<HKWaxLine> Lines { get; set; }
     public int Page { get; set; }
+    public bool CanDraw { get; set; }
   };
 }

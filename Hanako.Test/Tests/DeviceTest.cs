@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace Hanako.Test.Tests
       List<HKWaxLine> lnlst = WaxComposerTest.createTestWaxLineList(buf, view_w, view_h, fntsz, gyokan);
 
       //HKPageCreate page = new HKPageCreate();
-      IList<IHKWaxPage> pglst =new List<IHKWaxPage>();
+      var pglst =new List<IHKWaxPage>();
       HKPageCreate.CreatePageList(view_w,fntsz, lnlst,ref pglst);
 
       HKDevice dev = new HKDevice();

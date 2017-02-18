@@ -4,19 +4,28 @@
              xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              mvvm:ViewModelLocator.AutowireViewModel="True"
              xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             xmlns:conv="clr-namespace:Tategumi.Converters;assembly=Tategumi"
              xmlns:local="clr-namespace:Tategumi.TategumiViews"
-             x:Class="Tategumi.Views.HonbunPage">
+             x:Class="Tategumi.Views.HonbunPage"
+             x:Name="MyPage">
 
   <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-    <local:TategumiView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                        Width="{Binding TateviewWidth.Value}"
-                        Height="{Binding TateviewHeight.Value}"
-                        CurrentPage="{Binding CurrentPage.Value}"
-                        PageIndex="{Binding Path=PageIndex.Value,Mode=TwoWay}">
-    </local:TategumiView>
+    <cv:CarouselView ItemsSource="{Binding PageList}"
+                          VerticalOptions="FillAndExpand"
+                          HorizontalOptions="FillAndExpand"
+                          Width="{Binding TateviewWidth.Value}"
+                          Height="{Binding TateviewHeight.Value}"
+                          Position="{Binding Path=PageIndex.Value}">
+        <cv:CarouselView.ItemTemplate>
+        <DataTemplate>
+          <StackLayout Orientation="Vertical">
+            <local:TategumiView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                CurrentPage="{Binding}"/>
+          </StackLayout>
+        </DataTemplate>
+      </cv:CarouselView.ItemTemplate>
+    </cv:CarouselView>
     <StackLayout Orientation="Horizontal" VerticalOptions="End">
-      <Slider VerticalOptions="Center" HorizontalOptions="FillAndExpand"
-              Minimum="0" Value="{Binding Path=PageIndex.Value,Mode=TwoWay}"/>
       <Label Text="{Binding PageIndex.Value}"/>
       <Label Text="/"/>
       <Label Text="{Binding PageNum.Value}"/>

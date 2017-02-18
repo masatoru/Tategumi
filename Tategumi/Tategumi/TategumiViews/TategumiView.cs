@@ -24,10 +24,15 @@ namespace Tategumi.TategumiViews
     public IHKWaxPage CurrentPage
     {
       get { return (IHKWaxPage)GetValue(CurrentPageProperty); }
-      set { SetValue(CurrentPageProperty, value);}
+      set
+      {
+        //Debug.WriteLine($"TategumiView CurrentPage CanDraw={value.CanDraw}");
+        SetValue(CurrentPageProperty, value);
+      }
     }
     #endregion
 
+#if false
     #region PageIndex BindableProperty
     public static readonly BindableProperty PageIndexProperty =
       BindableProperty.Create(nameof(PageIndex), typeof(int), typeof(TategumiView), default(int), BindingMode.TwoWay,
@@ -57,11 +62,19 @@ namespace Tategumi.TategumiViews
       PageIndex--;
       return true;
     }
+#endif
+
     void ITategumiViewController.SendDraw(SKCanvas canvas)
     {
       if (canvas == null)
         throw new NullReferenceException("Canvasがnull");
-      Draw(canvas);
+
+      //Debug.WriteLine($"TategumiView SendDraw CanDraw={CurrentPage.CanDraw} IsEnabled={IsEnabled}");
+      //FLAGが立っている場合だけ描画
+      //if (!IsEnabled)
+      //  return;
+      if (CurrentPage.CanDraw)
+        Draw(canvas);
     }
     protected virtual void Draw(SKCanvas canvas)
 		{

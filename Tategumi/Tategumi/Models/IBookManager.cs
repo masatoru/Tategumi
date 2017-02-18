@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Hanako.Models;
 
@@ -9,7 +10,8 @@ namespace Tategumi.Models
     void ReadHonbunHtmlFromUrl(string url);
     void ReadContents(int articleId);
     void Compose();
-    IHKWaxPage CurrentPage { get; }
+    //IHKWaxPage CurrentPage { get; }
+    List<IHKWaxPage> PageList { get; }
     int PageIndex { get; set; }
     int PageNum { get; set; }
     int TateviewWidth { get; set; }
@@ -20,5 +22,7 @@ namespace Tategumi.Models
 
     bool IsFontSizeLarge { get; set; }          //文字サイズ大きく
     bool IsVisibleHinshi { get; set; }
+
+    bool IsEnableView { get; set;}
   }
 }
